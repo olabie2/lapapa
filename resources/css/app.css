@@ -1,0 +1,122 @@
+@import "tailwindcss";
+@plugin "flyonui";
+@plugin "@iconify/tailwind4";
+@import "flyonui/variants.css";
+
+@config "../../tailwind.config.js";
+/* Import Third-party override css */
+/* @import "flyonui/src/vendor/flatpickr.css"; */
+/* @import "flyonui/src/vendor/notyf.css"; */
+/* @import "flyonui/src/vendor/datatables.css"; */
+/* @import "flyonui/src/vendor/editor.css"; */
+/* @import "flyonui/src/vendor/fullcalendar.css"; */
+/* @import "flyonui/src/vendor/raty.css"; */
+/* @import "flyonui/src/vendor/waves.css"; */
+/* @import "flyonui/src/vendor/apexcharts.css"; */        
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+
+section:nth-child(odd) {
+  background-color: white; /* Light gray */
+}
+
+section:nth-child(even) {
+  background-color: #E2E1DE;
+}
+
+
+.container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem; /* Optional: Add some padding on the sides */
+    padding-right: 1rem; /* Optional: Add some padding on the sides */
+  }
+  
+  /* Extra small devices (portrait phones, less than 576px) */
+  @media (min-width: 0) {
+    .container {
+      max-width: 100%; /* Full width for extra small screens */
+    }
+  }
+  
+  /* Small devices (landscape phones, 576px and up) */
+  @media (min-width: 576px) {
+    .container {
+      max-width: 540px;
+    }
+  }
+  
+  /* Medium devices (tablets, 768px and up) */
+  @media (min-width: 768px) {
+    .container {
+      max-width: 720px;
+    }
+  }
+  
+  /* Large devices (desktops, 992px and up) */
+  @media (min-width: 992px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+  
+  /* Extra large devices (large desktops, 1200px and up) */
+  @media (min-width: 1200px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
+  
+  /* 1400px and up (optional, for even larger screens) */
+  @media (min-width: 1400px) {
+      .container {
+          max-width: 1320px;
+      }
+  }
+
+  @plugin "flyonui/theme" {
+    name: "light"; /* Or your preferred theme name */
+    default: true;     /* Set as default theme */
+    prefersdark: false;/* Keep false unless you are also defining a dark theme variant */
+    color-scheme: light; /* Your palette is light */
+  
+    --color-base-100:         oklch(100% 0 0);           /* White (#ffffff) */
+    --color-base-200:         oklch(91.14% 0.032 86.26); /* Cream (#f0e1c7) */
+    --color-base-300:         oklch(90.76% 0.006 88.39); /* Stone (#e2e1de) */
+    --color-base-content:     oklch(28.71% 0.03 53.68);  /* Coffee Bean (#3b2e2d) - Text on base */
+    
+    /* Primary Action Colors */
+    --color-primary:          oklch(47.56% 0.076 67.4);  /* Walnut (#795946) */
+    --color-primary-content:  oklch(100% 0 0);           /* White (#ffffff) - Text on primary */
+    
+    /* Secondary Action Colors */
+    --color-secondary:        oklch(59.34% 0.081 60.65); /* Tan (#a57667) */
+    /* Using Coffee Bean for text on secondary for better contrast than white */
+    --color-secondary-content:oklch(28.71% 0.03 53.68);  /* Coffee Bean (#3b2e2d) - Text on secondary */
+    
+    /* Accent Colors (Using Secondary colors as per our mapping) */
+    --color-accent:           oklch(59.34% 0.081 60.65); /* Tan (#a57667) */
+    --color-accent-content:   oklch(28.71% 0.03 53.68);  /* Coffee Bean (#3b2e2d) - Text on accent */
+    
+    /* Neutral Colors (Often for text, borders, or dark elements) */
+    --color-neutral:          oklch(28.71% 0.03 53.68);  /* Coffee Bean (#3b2e2d) */
+    --color-neutral-content:  oklch(100% 0 0);           /* White (#ffffff) - Text on neutral */
+  
+    /* === Keep Status Colors Default (Recommended) === */
+    --color-info:             oklch(79.71% 0.1339 211.53); /* Default Blue */
+    --color-info-content:     oklch(95.63% 0.0443 203.39); /* Default Light Blue/White */
+    --color-success:          oklch(77.29% 0.1535 163.22); /* Default Green */
+    --color-success-content:  oklch(95.05% 0.0507 163.05); /* Default Light Green/White */
+    --color-warning:          oklch(75.76% 0.159 55.93);  /* Default Yellow/Orange */
+    --color-warning-content:  oklch(95.42% 0.03715446392304164 75.16435946755645); /* Default Dark Text */
+    --color-error:            oklch(75.88% 0.1385 31.29);  /* Default Red */
+    --color-error-content:    oklch(97.58% 0.0151 61.35);  /* Default Light Red/White */
+  
+    /* You might have other variables here like border-radius, etc. Keep them as needed */
+  }
+  
+  /* Make sure the rest of your CSS/SCSS setup follows */
