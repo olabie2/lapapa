@@ -14,6 +14,7 @@ return [
     'hours_line3' => 'الأحد: مغلق',                           // تخصيص
 
     'form_name' => 'اسمك',
+    'form_photos_max' => 'الحد الاقصى 6 صور.',
     'form_phone' => 'رقم هاتفك',
     'form_email' => 'بريدك الإلكتروني',
     'form_message' => 'رسالتك / طلبك',

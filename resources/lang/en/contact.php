@@ -14,6 +14,7 @@ return [
     'hours_line3' => 'Sun: Closed',               // Customize
 
     'form_name' => 'Your Name',
+    'form_photos_max' => 'Max : 6 images.',
     'form_phone' => 'Your phone number',
     'form_email' => 'Your Email',
     'form_message' => 'Your Message / Request',

@@ -14,6 +14,7 @@ return [
     'hours_line3' => 'ראשון: סגור',            // התאמה אישית
 
     'form_name' => 'שמך',
+    'form_photos_max' => 'מקסימום: 6 תמונות.',
     'form_email' => 'האימייל שלך',
     'form_phone' => 'מספר הטלפון שלך',
     'form_message' => 'ההודעה / הבקשה שלך',

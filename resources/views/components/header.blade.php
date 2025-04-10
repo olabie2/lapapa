@@ -1,6 +1,3 @@
-<!-- Include Alpine.js -->
-<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
 <!-- Header Component -->
 <header
     class="w-full bg-white text-[#3B2E2D] shadow-md z-100 top-0 sticky"
@@ -8,9 +5,9 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-[80px]">
             <!-- Logo -->
-            <div class="flex-shrink-0 text-xl font-bold text-[#795946] max-w-[90px]">
+            <div class="flex-shrink-0 text-xl font-bold text-[#795946] w-[90px]">
                 <a href="">
-                    <img src="{{Vite::asset('resources/images/logo2.png')}}" alt="">
+                    <img src="{{Vite::asset('resources/images/logo2.webp')}}" alt="">
                 </a>
             </div>
 
@@ -24,8 +21,11 @@
 
             <!-- Buttons -->
             <div class="hidden md:flex items-center gap-3" :class="{'flex-row-reverse': document.dir === 'rtl'}">
-                <button class="bg-[#A57667] hover:bg-[#795946] text-white px-4 py-2 rounded-lg text-sm">@lang('auth.login')</button>
-                <button class="border border-[#A57667] text-[#A57667] hover:bg-[#E2E1DE] px-4 py-2 rounded-lg text-sm">@lang('auth.register')</button>
+                <!-- <button class="bg-[#A57667] hover:bg-[#795946] text-white px-4 py-2 rounded-lg text-sm">@lang('auth.login')</button> -->
+                <!-- <button class="border border-[#A57667] text-[#A57667] hover:bg-[#E2E1DE] px-4 py-2 rounded-lg text-sm">@lang('auth.register')</button> -->
+                 @auth 
+                 <x-myaccount-dropdown/>
+                 @endauth
                 <x-language-switcher />
             </div>
 
@@ -63,20 +63,3 @@
 
 </header>
 
-<!-- Add RTL detection -->
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const dir = document.documentElement.getAttribute('dir') || 'ltr';
-        document.documentElement.classList.add(dir);
-    });
-</script>
-
-<style>
-    [dir="rtl"] .rtl\:space-x-reverse> :not([hidden])~ :not([hidden]) {
-        --tw-space-x-reverse: 1;
-    }
-
-    [dir="ltr"] .rtl\:space-x-reverse> :not([hidden])~ :not([hidden]) {
-        --tw-space-x-reverse: 0;
-    }
-</style>

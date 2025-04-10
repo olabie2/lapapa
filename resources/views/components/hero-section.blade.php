@@ -1,42 +1,63 @@
-@props([
-// Static content for the hero section
-'title' => 'Your Hero Title',
-'paragraph' => 'Your captivating description goes here and stays in place as the background images transition smoothly.',
-// Set to true to enable RTL layout
-'rtl' => false,
-// List your background images. Ensure these images are available in public/images.
-'bgImages' => [
-asset('images/slide1.jpg'),
-asset('images/slide2.jpg'),
-asset('images/slide3.jpg'),
-],
-])
-<section class="relative overflow-hidden"
-    x-data="{ activeIndex: 0, images: @js($bgImages) }"
-    x-init="setInterval(() => { activeIndex = (activeIndex + 1) % images.length }, 5000)">
-    <!-- Background Image Carousel -->
+@props(['images' => []])
+
+<section 
+    x-data="heroSlider()" 
+    x-init="start()" 
+    class="relative w-full h-screen overflow-hidden text-white"
+>
+    <!-- Background images -->
     <template x-for="(image, index) in images" :key="index">
-        <div
-            x-show="activeIndex === index"
-            x-transition:enter="transition-opacity duration-1000"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition-opacity duration-1000"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="absolute inset-0 w-full h-full bg-cover bg-center"
-            :style="'background-image: url(' + image + ');'">
-        </div>
-    </template>
+    <div 
+        class="absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out"
+        :class="{
+            'opacity-100 z-0': currentIndex === index,
+            'opacity-0 z-0': currentIndex !== index
+        }"
+        :style="`background-image: url('${image}')`"
+    ></div>
+</template>
 
-    <!-- Overlay to improve text readability -->
-    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 z-10"></div>
 
-    <!-- Hero Content (Title & Paragraph) -->
-    <div class=" h-[100vh] w-[100vw] tx-large font-bold space-y-6  relative z-10 flex flex-col items-center justify-center text-center px-4">
-        <h1 class="text-7xl  leading-[1.4]
-         font-extrabold bg-gradient-to-r from-[#a57667] via-[#f0e1c7] to-[#e2e1de] text-transparent bg-clip-text
-        ">@lang('hero-section.title')</h1>
-        <p class="mt-4 text-lg text-brand-off-white">@lang('hero-section.paragraph')</p>
+    <!-- Text Content -->
+    <div class="relative z-20 flex flex-col items-center justify-center h-full px-4 text-center">
+        <h1 
+            class="font-bold leading-[1.5] text-4xl md:text-6xl lg:text-7xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-dark-brown via-brand-light-brown to-brand-beige animate-text-gradient"
+        >
+            {{ __('hero-section.title') }}
+        </h1>
+        <p class="text-lg md:text-xl lg:text-2xl max-w-2xl text-brand-off-white">
+            {{ __('hero-section.paragraph') }}
+        </p>
     </div>
 </section>
+
+@push('scripts')
+<script>
+    function heroSlider() {
+        return {
+            images: @json($images),
+            currentIndex: 0,
+            start() {
+                setInterval(() => {
+                    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+                }, 5000);
+            }
+        }
+    }
+</script>
+@endpush
+
+<style>
+    .animate-text-gradient {
+        background-size: 200% auto;
+        animation: gradientShift 5s ease infinite;
+    }
+
+    @keyframes gradientShift {
+        0% { background-position: 0% center; }
+        50% { background-position: 100% center; }
+        100% { background-position: 0% center; }
+    }
+</style>

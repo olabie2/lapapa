@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
+use App\Http\Controllers\Auth\LoginController;
 // Group routes to apply localization middleware and prefix
 Route::group(
     [
@@ -16,8 +16,18 @@ Route::group(
         });
         Route::get('pricing', function () {
             return view('pricing');
-        });
-    }
-); // End Localization Group
+        }); 
+        Route::get('login', [LoginController::class, 'showLoginForm'])->name('login.form');
+        Route::post('login', [LoginController::class, 'login'])->name('login');
+        Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
-// You might ne
+
+        Route::get('profile',function(){
+            return 'this is my profile';
+        })->name('profile');
+
+        Route::get('dashboard',function(){
+            return 'this is the dashboard.';
+        })->name('dashboard');
+    }
+); 

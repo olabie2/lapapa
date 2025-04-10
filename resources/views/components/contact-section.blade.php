@@ -97,16 +97,17 @@
                             class="w-full px-4 py-2 border border-[#A57667] rounded-md bg-white text-[#3B2E2D] focus:ring-2 focus:ring-[#A57667] focus:border-transparent outline-none transition"></textarea>
                     </div>
                     <div>
-                        <label for="photo" class="block text-sm font-medium text-[#3B2E2D] mb-1">{{ __('contact.form_photo_label') }}</label>
-                        <input type="file" name="photo" id="photo" accept="image/*"
-                            class="w-full text-sm text-[#795946]
-                                       file:mr-4 file:py-2 file:px-4
-                                       file:rounded-md file:border-0
-                                       file:text-sm file:font-semibold
-                                       file:bg-[#F0E1C7] file:text-[#3B2E2D]
-                                       hover:file:bg-[#e2d5be] transition file:cursor-pointer">
-                        <p class="text-xs text-[#795946] mt-1">{{ __('contact.form_photo_helper') }}</p>
-                    </div>
+    <label for="photos" class="block text-sm font-medium text-[#3B2E2D] mb-1">{{ __('contact.form_photo_label') }}</label>
+    <input type="file" name="photos[]" id="photos" accept="image/*" multiple
+        class="w-full text-sm text-[#795946]
+               file:mr-4 file:py-2 file:px-4
+               file:rounded-md file:border-0
+               file:text-sm file:font-semibold
+               file:bg-[#F0E1C7] file:text-[#3B2E2D]
+               hover:file:bg-[#e2d5be] transition file:cursor-pointer">
+    <p class="text-xs text-[#795946] mt-1">{{ __('contact.form_photo_helper') }} {{__('contact.form_photos_max')}}</p>
+</div>
+
 
                     <div class="text-left"> {{-- Ensure button aligns left in LTR --}}
                         <button type="submit"

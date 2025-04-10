@@ -1,37 +1,63 @@
 <!-- resources/views/components/services-section.blade.php -->
-
-{{-- Add CSS for animations and styling (Tailwind example below, adapt as needed) --}}
-{{-- You might put this in your main CSS file or a component-specific CSS --}}
-{{-- IMPORTANT: Ensure your CSS setup handles RTL (Right-to-Left) for Arabic/Hebrew if needed --}}
 <style>
-    /* .service-card-image {
+    /* Skeleton Loading Styles */
+    .skeleton {
+        position: relative;
+        overflow: hidden;
+        background-color: #e2e8f0;
+    }
+
+    .skeleton::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0,
+            rgba(255, 255, 255, 0.2) 20%,
+            rgba(255, 255, 255, 0.5) 60%,
+            rgba(255, 255, 255, 0)
+        );
+        animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+        100% {
+            transform: translateX(100%);
+        }
+    }
+
+    /* Optimized Animations */
+    .reveal-on-scroll {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-on-scroll.revealed {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .service-card-image {
         transition: transform 0.3s ease-out;
+        transform-origin: center;
     }
 
     .service-card:hover .service-card-image {
-        transform: scale(1.05);
-    } */
-
-    /* Simple fade-in animation (using Intersection Observer API is better for performance) */
-    /* .reveal-on-scroll {
-        opacity: 0;
-        transform: translateY(30px);
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        transform: scale(1.03);
     }
-
-    .reveal-on-scroll.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-    } */
-
-    /* Fix icon position potentially */
+    
 </style>
 
 <section id="services" class="py-16 md:py-24 overflow-hidden">
-    {{-- Add dir="rtl" dynamically here or on <html> tag based on App::getLocale() if needed --}}
     <div class="container mx-auto px-4">
+        <!-- Section Header Skeleton -->
+        <div class="text-center mb-12 md:mb-16 skeleton" style="height: 130px; display: none;" aria-hidden="true"></div>
 
-        {{-- Section Header --}}
+        <!-- Actual Section Header -->
         <div class="text-center mb-12 md:mb-16 reveal-on-scroll">
             <h2 class="text-3xl md:text-4xl font-serif font-bold text-gray-800 mb-3">
                 {{ __('services.section_title') }}
@@ -41,15 +67,35 @@
             </p>
         </div>
 
-        {{-- Services Grid --}}
+        <!-- Services Grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+            @foreach([1, 2, 3] as $service)
+                <!-- Skeleton Card -->
+                <div class="skeleton-card bg-white rounded-lg shadow-md overflow-hidden" aria-hidden="true">
+                    <div class="skeleton h-56 w-full"></div>
+                    <div class="p-6">
+                        <div class="skeleton h-6 w-3/4 mb-4"></div>
+                        <div class="skeleton h-4 w-full mb-2"></div>
+                        <div class="skeleton h-4 w-5/6"></div>
+                    </div>
+                </div>
+            @endforeach
 
-            {{-- Service Card 1: Alterations --}}
-            <div class="service-card bg-white rounded-lg shadow-md overflow-hidden reveal-on-scroll" style="transition-delay: 0.1s;">
-                <div class="overflow-hidden h-56">
-                    <img src="{{asset('images/tools2.jpg')}}"
-                        alt="{{ __('services.alt_text_1') }}" {{-- Use translation key for alt text --}}
-                        class="w-full h-full object-cover service-card-image">
+            <!-- Service Cards -->
+            <!-- Card 1: Alterations -->
+            <div class="service-card bg-white rounded-lg shadow-md overflow-hidden reveal-on-scroll">
+                <div class="relative h-56 overflow-hidden">
+                    <div class="skeleton absolute inset-0 z-10"></div>
+                    <img 
+                        src="{{Vite::asset('resources/images/tools2.webp')}}" 
+                        alt="{{ __('services.alt_text_1') }}"
+                        class="w-full h-full object-cover service-card-image"
+                        loading="lazy"
+                        decoding="async"
+                        width="400"
+                        height="300"
+                        onload="this.parentElement.querySelector('.skeleton').remove()"
+                    >
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-semibold font-serif text-gray-800 mb-2">
@@ -60,13 +106,19 @@
                     </p>
                 </div>
             </div>
-
-            {{-- Service Card 2: Household Textiles --}}
-            <div class="service-card bg-white rounded-lg shadow-md overflow-hidden reveal-on-scroll" style="transition-delay: 0.2s;">
-                <div class="overflow-hidden h-56">
-                    <img src="{{asset('images/dress4.jpg')}}"
-                        alt="{{ __('services.alt_text_2') }}" {{-- Use translation key for alt text --}}
-                        class="w-full h-full object-cover service-card-image">
+            <div class="service-card bg-white rounded-lg shadow-md overflow-hidden reveal-on-scroll">
+                <div class="relative h-56 overflow-hidden">
+                    <div class="skeleton absolute inset-0 z-10"></div>
+                    <img 
+                    src="{{Vite::asset('resources/images/threads1.webp')}}"  
+                        alt="{{ __('services.alt_text_1') }}"
+                        class="w-full h-full object-cover service-card-image"
+                        loading="lazy"
+                        decoding="async"
+                        width="400"
+                        height="300"
+                        onload="this.parentElement.querySelector('.skeleton').remove()"
+                    >
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-semibold font-serif text-gray-800 mb-2">
@@ -77,13 +129,19 @@
                     </p>
                 </div>
             </div>
-
-            {{-- Service Card 3: Ironing --}}
-            <div class="service-card bg-white rounded-lg shadow-md overflow-hidden reveal-on-scroll" style="transition-delay: 0.3s;">
-                <div class="overflow-hidden h-56">
-                    <img src="{{asset('images/iron2.jpg')}}"
-                        alt="{{ __('services.alt_text_3') }}" {{-- Use translation key for alt text --}}
-                        class="w-full h-full object-cover service-card-image">
+            <div class="service-card bg-white rounded-lg shadow-md overflow-hidden reveal-on-scroll">
+                <div class="relative h-56 overflow-hidden">
+                    <div class="skeleton absolute inset-0 z-10"></div>
+                    <img 
+                    src="{{Vite::asset('resources/images/dress4.webp')}}" 
+                        alt="{{ __('services.alt_text_1') }}"
+                        class="w-full h-full object-cover service-card-image"
+                        loading="lazy"
+                        decoding="async"
+                        width="400"
+                        height="300"
+                        onload="this.parentElement.querySelector('.skeleton').remove()"
+                    >
                 </div>
                 <div class="p-6">
                     <h3 class="text-xl font-semibold font-serif text-gray-800 mb-2">
@@ -94,16 +152,14 @@
                     </p>
                 </div>
             </div>
-
-            {{-- Optional Highlight Card/Section --}}
-            {{-- Note: The md:text-left and md:flex might need RTL adjustments in your CSS --}}
-            <div class="md:col-span-2 lg:col-span-3 mt-8 reveal-on-scroll" style="transition-delay: 0.4s;">
+  
+            <!-- Highlight Card -->
+            <div class="md:col-span-2 lg:col-span-3 mt-8 reveal-on-scroll">
                 <div class="bg-gradient-to-r from-blue-50 to-indigo-100 p-6 rounded-lg text-center md:text-left md:flex items-center gap-6">
-                    {{-- Optional Icon (Assuming icon itself doesn't need translation, but its position might need RTL adjustment via CSS) --}}
-                    <div class="mb-4 md:mb-0 text-indigo-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mx-auto md:mx-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L1.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L24.99 5.25l-.813 2.846a4.5 4.5 0 00-3.09 3.09L18.25 12zm-9.75 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 24l-2.846-.813a4.5 4.5 0 00-3.09-3.09L8.51 17.25zM18.25 12a6 6 0 11-12 0 6 6 0 0112 0z" />
-                        </svg>
+                    <!-- Content with skeleton fallback -->
+                    <div class="mb-4 md:mb-0 text-indigo-600 relative">
+                        <div class="skeleton w-12 h-12 rounded-full absolute"></div>
+                        <i class="bi bi-info-circle h-12 w-12 mx-auto md:mx-0 relative"></i>
                     </div>
                     <div>
                         <h4 class="text-xl font-semibold font-serif text-gray-800 mb-1">
@@ -115,30 +171,36 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- {{-- Add JS for Intersection Observer (more robust animation trigger) --}}
-{{-- This JS doesn't contain translatable text --}}
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove skeleton elements
+        const skeletons = document.querySelectorAll('[aria-hidden="true"]');
+        skeletons.forEach(skeleton => skeleton.remove());
+
+        // Intersection Observer for reveal animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    // Optional: Unobserve after animation to save resources
-                    // observer.unobserve(entry.target);
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, {
-            threshold: 0.1 // Trigger when 10% of the element is visible
+        }, { 
+            rootMargin: '0px 0px -50px 0px',
+            threshold: 0.1
         });
 
-        const elementsToReveal = document.querySelectorAll('.reveal-on-scroll');
-        elementsToReveal.forEach(el => {
-            observer.observe(el);
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        
+        // Preload important images
+        const criticalImages = document.querySelectorAll('.service-card-image');
+        criticalImages.forEach(img => {
+            img.loading = 'eager';
+            img.decode().catch(() => {});
         });
     });
-</script> -->
+</script>
