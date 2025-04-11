@@ -10,4 +10,8 @@ return [
     'login' => 'تسجيل الدخول',
     'email_required' => 'البريد الإلكتروني مطلوب',
     'password_required' => 'كلمة المرور مطلوبة',
+    'password_placeholder' => 'كلمة المرور',
+    'email_placeholder' => 'البريد الإلكتروني',
+    'register_link' => 'إنشاء حساب جديد',
+    'or' => 'أو',
 ];

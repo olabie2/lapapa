@@ -10,4 +10,9 @@ return [
     'login' => 'Sign In',
     'email_required' => 'Email is required',
     'password_required' => 'Password is required',
+    'password_placeholder' => 'Password',
+    'email_placeholder' => 'Email',
+    'register_link' => 'Create new account',
+    'or' => 'or',
+
 ];
